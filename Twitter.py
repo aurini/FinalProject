@@ -12,6 +12,11 @@ from tkcalendar import Calendar
 import matplotlib.pyplot as plt
 from tkinter import messagebox as mbox
 
+import numpy as np
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
+NavigationToolbar2Tk)
+
 class twitter() :
     start_date = 0
     end_date = 0
@@ -71,10 +76,15 @@ class twitter() :
             self.sentiment_count.append(self.neutral_count)
             self.sentiment_count.append(self.negative_count)
 
-            plt.bar(['postive', 'neutral', 'negative'], self.sentiment_count, label="sentiment count", color='g')
-            plt.legend()
-            plt.xlabel('sentiment')
-            plt.ylabel('Sentiment count')
+            root1 = tk.Toplevel()
+            fig1 = Figure(figsize=(10, 7), dpi=100)
+            ax = fig1.add_subplot(111)
+            listObject = ['postive', 'neutral', 'negative']
+            ax.bar(['postive', 'neutral', 'negative'], self.sentiment_count, label="sentiment count", color='g')
+            canvas = FigureCanvasTkAgg(fig1, root1)
+            canvas.draw()
+            canvas.get_tk_widget().pack()
+
 
 
             # plt.plot(self.get_user_tweet_date, self.result_en_polarity, label="Example two", color='g')
@@ -82,9 +92,9 @@ class twitter() :
             # plt.xlabel('date')
             # plt.ylabel('polarity')
 
-            plt.title('Epic Graph\nAnother Line! Whoa')
-
-            plt.show()
+            # plt.title('Epic Graph\nAnother Line! Whoa')
+            #
+            # plt.show()
             conn.close()
 
         def analyze_data():

@@ -23,7 +23,6 @@ splash_root.overrideredirect(True)
 splash_label = Label(splash_root, text = 'EMOTOS', font=("Helvetica",80))
 splash_label.pack(pady=20)
 
-
 def getNext1():
     b =Bangla_UI2()
     b.bangla_UI2()
